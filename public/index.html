@@ -2,6 +2,24 @@
 <html>
 <head>
   <title>Node Simple Starter</title>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <style>
+    .row {
+      width: 750px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .rowHeader {
+      font-weight: bold
+    }
+    .col {
+      display: inline-block;
+      width: 25%;
+    }
+  </style>
 </head>
 <body>
   <h1>
@@ -13,7 +31,55 @@
     <div id="result"></div>
   </div>
 
+  <h1>
+    Tournaments
+  </h1>
+
+  <div>
+    <div id="tournamentData">
+      <div class='row'>
+        <span class="col rowHeader gameType">Game Type</span>
+        <span class="col rowHeader tourneyName">Tournament Name</span>
+        <span class="col rowHeader totalPlayers">Total Players</span>
+        <span class="col rowHeader isComplete">Is Complete</span>
+      </div>
+    </div>
+  </div>
+
 <script type="text/javascript">
+  $.when( $.ready ).then(function() {
+  // Document is ready.
+  // Display Tournaments
+  $.get('tournaments', (tournaments) => {
+    tournaments
+      .sort((a, b) => {
+        const typeA = a.tournament.game_name;
+        const typeB = b.tournament.game_name;
+        if (typeA !== typeB) {
+          return typeA > typeB ? 1 : -1;
+        }
+        return a.tournament.name > b.tournament.name ? 1 : -1;
+      })
+      .forEach(({tournament}) => {
+      const {
+        name,
+        state,
+        game_name: type,
+        participants_count: totalPlayers,
+      } = tournament;
+      const row = $('<div />').addClass('row')
+        .append(`<span class="col gameType">${type}</span>`)
+        .append(`<span class="col tourneyName">${name}</span>`)
+        .append(`<span class="col totalPlayers">${totalPlayers}</span>`)
+        .append(`<span class="col isComplete">${state === 'complete'}</span>`);
+
+      $('#tournamentData').append(row);
+
+    })
+  });
+
+
+  });
   document.getElementById('callAPI').addEventListener('click', function (evt) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.open('GET', '/api/random', true);

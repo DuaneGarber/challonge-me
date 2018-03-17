@@ -1,9 +1,15 @@
 const express = require('express');
 
+const challongeAPI = require('./src/challonge');
+
 const app = express();
 const HTTP_PORT = 3000;
 
 app.use(express.static('public'));
+
+app.get('/tournaments', (req, res) =>
+  challongeAPI.tournaments.getAll()
+    .then(apiRes => res.json(apiRes)));
 
 app.get('/api/random', (req, res) => {
   res.send({
