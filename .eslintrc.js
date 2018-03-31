@@ -1,3 +1,6 @@
 module.exports = {
-    "extends": "airbnb"
+    "extends": "airbnb",
+    "rules": {
+        "max-len": [2, 160]
+    }
 };
