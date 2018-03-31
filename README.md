@@ -25,8 +25,8 @@ Lifetime standings accross all tournaments for each game type
     * Major issue: since noone has accounts, connecting players accross tournaments may be hard :grimacing:
   * Wrote a lot of bad code, need to clean up eventually
   * Have a rough start to the lifetime history, just need to keep chugging down path
-
-  ![Screenshot](3-11.png)
+  
+![Ugliness](3-18.png)
 
 
 3-31
