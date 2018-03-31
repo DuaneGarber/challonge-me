@@ -22,8 +22,18 @@ Lifetime standings accross all tournaments for each game type
   * Cleaned up the Tournament names in Challonge
     * YY QQ Event
   * Started down the participant path
-    * Major issue: since noone has accounts, connecting players accross tournaments may be hard :grimmace:
+    * Major issue: since noone has accounts, connecting players accross tournaments may be hard :grimacing:
   * Wrote a lot of bad code, need to clean up eventually
-  * Have a rough start to the lifetime history, just need to keep chugging down path
-  
+  * Have a rough start to the lifetime history, just need to keep chugging down path
+
   ![Screenshot](3-11.png)
+
+
+3-31
+  * Cleaned up ugly, ugly async code
+  * Retrieving player data and organizing them by name is done
+  * Players now have records and it spits out a leaderboard in console!
+  * Still biggest problem looming is the ability to connect players with their opponent
+    * Right now the opponents have multiple ids so finding each opponent is O(n)
+    * Which means finding all matches is O(n^2) :sweat_smile:
+    * Granted this is all in memory, should maybe consider starting to store data in redis
